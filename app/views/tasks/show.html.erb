@@ -1,0 +1,7 @@
+<h1>TODOさん詳細ページ</h1>
+
+<p><%= @task.content %></p>
+
+<%= link_to '一覧に戻る', tasks_path %>
+<%= link_to 'このTODOさんを編集する', edit_task_path(@task) %>
+<%= link_to 'このTODOさんを削除する', @message, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
