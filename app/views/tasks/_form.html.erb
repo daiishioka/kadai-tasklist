@@ -8,11 +8,20 @@
 			</ul>
 		</div>
 	<% end %>
-  <%= f.label :content, 'TODOさん' %>
-  <%= f.text_field :content %>
+	
+	<div class="row">
+		<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6">
+			<div class="form-group">
+ 				<%= f.label :content, 'TODOさん' %>
+  			<%= f.text_field :content, class: "form-control" %>
+  		</div>
   
-  <%= f.label :status, '状況' %>
-  <%= f.text_field :status %>
+  		<div class="form-group">
+  			<%= f.label :status, '状況' %>
+ 			 	<%= f.text_field :status, class: "form-control" %>
+ 			</div>
+ 		</div>
+  </div>
 
   <%= f.submit '投稿' %>
 <% end %>
