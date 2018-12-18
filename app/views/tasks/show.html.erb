@@ -1,6 +1,7 @@
 <h1>TODOさん詳細ページ</h1>
 
-<p><%= @task.content %></p>
+<p>TODOさん: <%= @task.content %></p>
+<p>状況: <%= @task.status %></p>
 
 <%= link_to '一覧に戻る', tasks_path %>
 <%= link_to 'このTODOさんを編集する', edit_task_path(@task) %>
