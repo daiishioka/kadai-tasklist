@@ -1,3 +1,5 @@
+<% if logged_in? %>
+	<p>ログイン完了ユーザ: <%= current_user.name %></p>
 <h1>TODOさんの日課</h1>
 
 <ul>
@@ -7,3 +9,12 @@
 </ul>
 
 <%= link_to '新規TODOさん作成', new_task_path %>
+
+<% else %>
+	<div class="center jumbotron">
+		<div class="text-center">
+			<h1>さあ、やることを整理しよう</h1>
+			<%= link_to 'MyTODOリスト作成', signup_path, class: 'btn btn-lg btn-primary' %>
+		</div>
+	</div>
+<% end %>
