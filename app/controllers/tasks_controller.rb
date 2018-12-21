@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 	def index
+	  if logged_in?
+	    @taskpost = current_user.taskposts.build
+	    @taskposts = current_user.taskposts.order('created_at DESC').page(params[:page])
+	  end
 		@tasks = Task.all
 	end
   
