@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
   end
   
   def counts(user)
-    @count_taskposts = user.taskposts.count
+    @count_tasks = user.tasks.count
   end
 end

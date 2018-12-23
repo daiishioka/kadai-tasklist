@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:index, :show]
   
+  include SessionsHelper
+  
   def index
     @users = User.all.page(params[:page])
   end
 
   def show
     @user = User.find(params[:id])
-    @taskposts = @user.taskposts.order('created_at DESC').page(params[:page])
+    @tasks = @user.tasks.order('created_at DESC').page(params[:page])
     counts(@user)
   end
 
@@ -20,7 +22,8 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:success] = 'ユーザ登録完了'
-      redirect_to @user
+      session[:user_id] = @user.id
+      redirect_to root_url
     else
       flash.now[:danger] = 'ユーザ登録失敗'
       render :new
@@ -30,6 +33,6 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

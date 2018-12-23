@@ -1,11 +1,12 @@
 class TasksController < ApplicationController
+	before_action :require_user_logged_in, except: [:index]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+
 	def index
 	  if logged_in?
-	    @taskpost = current_user.taskposts.build
-	    @taskposts = current_user.taskposts.order('created_at DESC').page(params[:page])
+	  	@task = current_user.tasks.build
+	    @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
 	  end
-		@tasks = Task.all
 	end
   
   def show
@@ -16,11 +17,11 @@ class TasksController < ApplicationController
   end
   
   def create
-  	@task = Task.new(task_params)
+  	@task = current_user.tasks.build(task_params)
   	
   	if @task.save
   		flash[:success] = 'TODOさんが正常に作成されました'
-  		redirect_to "/"
+  		redirect_to root_url
   	else
   		flash.now[:danger] = 'TODOさんは作成されませんでした'
   		render :new
@@ -45,7 +46,7 @@ class TasksController < ApplicationController
   	@task.destroy
   	
   	flash[:success] = 'TODOさんは正常に削除されました'
-  	redirect_to tasks_url
+  	redirect_to root_url
   end
   
 	private
